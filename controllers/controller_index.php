@@ -144,6 +144,8 @@ class indexController extends Controller {
 				
 				}
 				
+				$arr_api['MESSAGE']='No tasks specified...';
+				
 			}
 		
 		}
