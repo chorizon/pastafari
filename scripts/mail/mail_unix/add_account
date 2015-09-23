@@ -1,13 +1,15 @@
-#!/bin/sh
+#!/usr/bin/ruby
 
-echo "pepe"
+from time import sleep
 
-sleep 5
+print('{"PROGRESS": 0, "MESSAGE": "Beggining process...", "ERROR":0}')
 
-echo "juan"
+sleep(5)
 
-sleep 5
+print('{"PROGRESS": 50, "MESSAGE": "Adding new email", "ERROR":0}')
 
-echo "pendon"
+sleep(5)
+
+print('{"PROGRESS": 100, "MESSAGE": "Successful!!!", "ERROR":0}')
 
 
