@@ -10,9 +10,9 @@
     ],
     "minimum-stability": "dev-master",
     "require": {
-
-	"symfony/process": "@stable",
-        "monolog/monolog": "@stable"
+        "symfony/process": "@stable",
+        "monolog/monolog": "@stable",
+        "ramsey/uuid": "@stable"
     }    
 
 }
