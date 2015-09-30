@@ -5,6 +5,7 @@ use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\StreamHandler;
 use Symfony\Component\Process\Process;
 use PhangoApp\PhaUtils\Utils;
+use Ramsey\Uuid\Uuid;
 
 $logger;
 
@@ -14,7 +15,7 @@ function loadConsole()
 	//ERROR=0 PROGRESS=100 MESSAGE=''
 	
 	
-	$options=get_opts_console('', $arr_opts=array('command:', 'arguments'));
+	$options=get_opts_console('', $arr_opts=array('command:', 'arguments:'));
 	
 	if(!isset($options['command']))
 	{
@@ -34,7 +35,8 @@ function loadConsole()
 	
 	//Make forking
 	//Unique token for this element
-	$token=Utils::get_token(64);
+	$uuid1=Uuid::uuid1();
+    $token=$uuid1->toString();
 	
 	$settings=array();
         
@@ -67,7 +69,7 @@ function loadConsole()
     if(!file_exists($options['command']))
     {
     
-        echo json_encode(array('ERROR' => 1, 'MESSAGE' => 'Error: command '.trim($options['command']).' not exists', 'CODE_ERROR' => 'PASTA_ERROR_CHILDREN_SCRIPT'));
+        echo json_encode(array('ERROR' => 1, 'MESSAGE' => 'Error: command '.trim($options['command']).' not exists', 'CODE_ERROR' => PASTA_ERROR_CHILDREN_SCRIPT));
             
         exit(1);
     
@@ -77,7 +79,7 @@ function loadConsole()
 	
     if ($pid == -1) 
     {
-        echo json_encode(array('ERROR' => 1, 'MESSAGE' => 'CANNOT FORK, check php configuration', 'CODE_ERROR' => 'PASTA_ERROR_FORK'));
+        echo json_encode(array('ERROR' => 1, 'MESSAGE' => 'CANNOT FORK, check php configuration', 'CODE_ERROR' => PASTA_ERROR_FORK));
         exit(0);
     } 
     elseif ($pid) 
@@ -127,9 +129,10 @@ function loadConsole()
             {
                 #$arr_error=$buffer;
                 
-                $logger->addInfo($buffer);
+                $logger->addInfo(json_encode(array('ERROR' => 1, 'CODE_ERROR' => PASTA_ERROR_CHILDREN_SCRIPT, 'MESSAGE' => $buffer)));
                 
-            } else 
+            } 
+            else 
             {
                 
                 $logger->addInfo($buffer);
@@ -139,11 +142,11 @@ function loadConsole()
         });
         
         //Check if error in command
-        
+        /*
         if (!$process->isSuccessful()) 
         {
             $logger->addInfo(json_encode(array('ERROR' => 1, 'CODE_ERROR' => PASTA_ERROR_CHILDREN_SCRIPT, 'MESSAGE' => $process->getOutput()) ) );
-        }
+        }*/
     }
 
 
