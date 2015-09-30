@@ -34,7 +34,7 @@ class indexController extends Controller {
         if($settings['path_scripts']=='')
         {
         
-           $settings['path_scripts'] =Routes::$base_path.'/modules/pastafari/scripts';
+           $settings['path_scripts'] =Routes::$base_path.'/scripts';
         
         }
 	
@@ -82,7 +82,7 @@ class indexController extends Controller {
 							
 							$parameters=implode(' ', $arr_save);
 							
-							$process = new Process('sudo php '.Routes::$base_path.'/console.php -m pastafari -c load --command=\''.$command.'\' --arguments=\''.$parameters.'\'');
+							$process = new Process('sudo php '.Routes::$base_path.'/console.php -m chorizon/pastafari -c load --command=\''.$command.'\' --arguments=\''.$parameters.'\'');
                             
                             $process->run(function ($type, $buffer) {
                             
