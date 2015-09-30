@@ -1,6 +1,13 @@
 #!/usr/bin/python3 -u
 
 from time import sleep
+import argparse
+
+parser = argparse.ArgumentParser(description='A simple script for add an unix account')
+
+parser.add_argument('--mailbox', help='The mailbox to create', required=True)
+
+args = parser.parse_args()
 
 print('{"PROGRESS": 0, "MESSAGE": "Beggining process...", "ERROR":0}')
 

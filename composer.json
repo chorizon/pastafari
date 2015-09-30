@@ -1,0 +1,18 @@
+{
+    "name": "chorizon/pastafari",
+    "description": "An API for execute tasks in servers",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Antonio de la Rosa",
+            "email": "webmaster@web-t-sys.com"
+        }
+    ],
+    "minimum-stability": "dev-master",
+    "require": {
+
+	"symfony/process": "@stable",
+        "monolog/monolog": "@stable"
+    }    
+
+}
